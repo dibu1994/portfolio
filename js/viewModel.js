@@ -132,6 +132,7 @@ var viewModel = function () {
     this.projects = ko.observableArray([]);
     my_projects.forEach(function (project) {
         self.projects.push(new Project(project));
+        
     });
 
     this.techs = ko.observableArray([]);
