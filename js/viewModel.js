@@ -1,5 +1,32 @@
 var my_projects = [
     {
+        name: "AirQ",
+        category: [
+            "Android"
+        ],
+        img: "img/android.png",
+        description: "Project",
+        category_image: "img/android-logo.png"
+    },
+    {
+        name: "Popular Movies",
+        category: [
+            "Android"
+        ],
+        img: "img/android.png",
+        description: "Project",
+        category_image: "img/android-logo.png"
+    },
+    {
+        name: "HTML5 Paint",
+        category: [
+            "HTML 5"
+        ],
+        img: "img/android.png",
+        description: "Project",
+        category_image: "img/html.png"
+    },
+    {
         name: "HTML5 Paint",
         category: [
             "HTML 5"
@@ -57,12 +84,45 @@ var my_projects = [
     }
 ]
 
+var myTechs = [
+    "Android",
+    "Angular 2",
+    "HTML 5",
+    "Java",
+    "Node JS"
+]
+
+var myBio={
+    name:"Divyanshu",
+    education:[
+        {
+            degree:"B.Tech",
+            school:"IIT Delhi"
+        },
+        {
+            degree:"Android Developer Nanodegree",
+            school:"Udacity"
+        },
+        {
+            degree:"Front End Web Developer Nanodegree",
+            school:"Udacity"
+        }
+    ]
+}
+
 var Project = function (data) {
     this.name = ko.observable(data.name);
     this.category = ko.observableArray(data.category);
     this.img = ko.observable(data.img);
     this.description = ko.observable(data.description);
-    this.category_image= ko.observable(data.category_image);
+    this.category_image = ko.observable(data.category_image);
+}
+
+var Bio=function(data){
+    var self=this;
+    this.name=ko.observable(data.name);
+    this.education=ko.observableArray(data.education);
+    
 }
 
 var viewModel = function () {
@@ -70,13 +130,20 @@ var viewModel = function () {
     var self = this;
 
     this.projects = ko.observableArray([]);
-    this.techs = ko.observableArray(["Angular 2", "HTML 5", "Java", "Node JS"]);
-    this.selectedTechs = ko.observableArray([]);
-    console.log(self.selectedTechs().length);
-
     my_projects.forEach(function (project) {
         self.projects.push(new Project(project));
     });
+
+    this.techs = ko.observableArray([]);
+    myTechs.forEach(function(tech){
+        self.techs.push(tech)
+    });
+
+    this.bio=ko.observable(new Bio(myBio));
+
+    console.log(this.bio().education().length);
+
+    this.selectedTechs = ko.observableArray([]);
 
     this.filteredProjects = ko.computed(function () {
 
